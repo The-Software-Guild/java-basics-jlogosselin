@@ -1,5 +1,4 @@
 
-import java.util.Locale;
 import java.util.Scanner;
 
 
@@ -15,7 +14,6 @@ public class RockPaperScissors {
             introMessage();
 
             for(int i=0; i<numberOfRounds; i++) {
-
                 int playerMove = playerMove();
                 int computerMove = computerMove();
                 System.out.println("You played " + showPlay(playerMove) + ", computer played " + showPlay(computerMove));
