@@ -1,4 +1,5 @@
 
+import java.util.Locale;
 import java.util.Scanner;
 
 
@@ -35,20 +36,31 @@ public class RockPaperScissors {
     }
 
     public static int enterInteger(int x){
+        if(x == 1) enterNumberRoundsMessage();
+        else if (x == 2) enterPlayerMove();
         Scanner userInput = new Scanner(System.in);
         String n;
         boolean r1, r2=false;
+        int flag;
         do{
-            if(x == 1) enterNumberRoundsMessage();
-            else if (x == 2) enterPlayerMove();
+            flag = 0;
             n = userInput.nextLine();
             r1 = isNumeric(n);
             if(r1){
-                if(Integer.parseInt(n) >= 1 && Integer.parseInt(n) <= 10){
+                flag = 1;
+                if(x == 1 && Integer.parseInt(n) >= 1 && Integer.parseInt(n) <= 10){
                     r1 = true;
                     r2 = true;
+                    flag = 2;
+                }
+                else if(x == 2 && Integer.parseInt(n) >= 1 && Integer.parseInt(n) <= 3){
+                    r1 = true;
+                    r2 = true;
+                    flag = 2;
                 }
             }
+            if(flag == 0) System.out.println("Error: your input is not an integer. Try again.");
+            else if (flag == 1) System.out.println("Error: your integer is not in range. Try again.");
         }while(r1 == false || r2 == false);
         return Integer.parseInt(n);
     }
@@ -131,13 +143,13 @@ public class RockPaperScissors {
     }
 
     public static void playAgainMessage(){
-        System.out.println("Do you wish to play again? (No / Yes)");
+        System.out.println("Do you wish to play again? (n / y)");
     }
 
     public static String playAgain(){
         Scanner userInput = new Scanner(System.in);
         String answer = userInput.nextLine();
-        while(!(answer.equals("No")) && !(answer.equals("Yes"))){
+        while(!(answer.toLowerCase().equals("n")) && !(answer.toLowerCase().equals("y"))){
             System.out.println("Sorry, incorrect input.");
             playAgainMessage();
             answer = userInput.nextLine();
